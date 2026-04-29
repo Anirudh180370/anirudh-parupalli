@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://anirudh180370.github.io/anirudh-parupalli/sitemap.xml

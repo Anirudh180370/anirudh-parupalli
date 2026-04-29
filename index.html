@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>
+    // Add 'js' class as early as possible so reveal animations only hide content when JS is present
+    document.documentElement.classList.add('js');
+    // Safety net: if anything goes wrong with animations, reveal everything after 3s
+    setTimeout(function () {
+      document.querySelectorAll('[data-reveal]').forEach(function (el) {
+        el.classList.add('is-visible');
+      });
+    }, 3000);
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anirudh Parupalli — Founder · Business Analyst · Author · Researcher</title>
+  <meta name="description" content="Anirudh Parupalli — Founder of Next Zen AI Strategix, published author of 3 books, UK Design Patent holder, conference reviewer for 30+ international conferences, editorial board member, and AI research analyst." />
+  <meta name="author" content="Anirudh Parupalli" />
+
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="Anirudh Parupalli — Founder · Author · Researcher" />
+  <meta property="og:description" content="Founder of Next Zen AI Strategix · Published author · UK Design Patent holder · 30+ conference reviewer · Editorial board member." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/img/anirudh.jpg" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90' font-family='system-ui'%3E🚀%3C/text%3E%3C/svg%3E" />
+
+  <!-- Tailwind via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: { 950: '#05060f', 900: '#0a0d1f', 800: '#11142b' },
+            cyan2: { 400: '#22d3ee', 500: '#06b6d4' },
+            violet2: { 400: '#a78bfa', 500: '#8b5cf6', 600: '#7c3aed' },
+          },
+          fontFamily: {
+            display: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Lucide icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="bg-ink-950 text-slate-100 font-sans antialiased overflow-x-hidden">
+
+  <!-- Skip to content -->
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] bg-cyan2-500 text-ink-950 px-4 py-2 rounded">Skip to content</a>
+
+  <!-- Particle / glow background -->
+  <div class="fixed inset-0 -z-10 pointer-events-none">
+    <div class="absolute top-0 left-1/4 w-[600px] h-[600px] bg-violet2-600/20 rounded-full blur-[120px]"></div>
+    <div class="absolute top-1/2 right-0 w-[500px] h-[500px] bg-cyan2-500/15 rounded-full blur-[120px]"></div>
+    <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-violet2-500/15 rounded-full blur-[120px]"></div>
+    <canvas id="particles" class="absolute inset-0 w-full h-full opacity-40"></canvas>
+  </div>
+
+  <!-- Navigation -->
+  <nav id="nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#hero" class="flex items-center gap-2 group">
+        <span class="w-9 h-9 rounded-lg bg-gradient-to-br from-cyan2-400 to-violet2-500 flex items-center justify-center font-display font-bold text-ink-950 group-hover:scale-110 transition-transform">AP</span>
+        <span class="font-display font-semibold tracking-tight text-lg hidden sm:inline">Anirudh Parupalli</span>
+      </a>
+      <ul class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+        <li><a href="#about" class="hover:text-cyan2-400 transition">About</a></li>
+        <li><a href="#experience" class="hover:text-cyan2-400 transition">Experience</a></li>
+        <li><a href="#books" class="hover:text-cyan2-400 transition">Books</a></li>
+        <li><a href="#research" class="hover:text-cyan2-400 transition">Research</a></li>
+        <li><a href="#patent" class="hover:text-cyan2-400 transition">Patent</a></li>
+        <li><a href="#contact" class="hover:text-cyan2-400 transition">Contact</a></li>
+      </ul>
+      <a href="#contact" class="hidden md:inline-flex items-center gap-2 bg-gradient-to-r from-cyan2-500 to-violet2-500 text-ink-950 font-semibold px-5 py-2 rounded-full text-sm hover:shadow-lg hover:shadow-cyan2-500/30 transition-all">
+        <i data-lucide="send" class="w-4 h-4"></i>
+        Get in touch
+      </a>
+      <button id="menuBtn" class="md:hidden text-slate-200" aria-label="Open menu">
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="hidden md:hidden bg-ink-900/95 backdrop-blur-lg border-t border-white/5">
+      <ul class="px-6 py-4 space-y-3 text-slate-200">
+        <li><a href="#about" class="block py-2">About</a></li>
+        <li><a href="#experience" class="block py-2">Experience</a></li>
+        <li><a href="#books" class="block py-2">Books</a></li>
+        <li><a href="#research" class="block py-2">Research</a></li>
+        <li><a href="#patent" class="block py-2">Patent</a></li>
+        <li><a href="#contact" class="block py-2">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="main">
+
+    <!-- HERO -->
+    <section id="hero" class="relative min-h-screen flex items-center pt-24 pb-16">
+      <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-12 gap-12 items-center w-full">
+        <div class="lg:col-span-7 space-y-8" data-reveal>
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm text-xs font-medium text-cyan2-400 tracking-wide">
+            <span class="w-2 h-2 rounded-full bg-cyan2-400 animate-pulse"></span>
+            Available for collaboration · Based in the United States
+          </div>
+
+          <h1 class="font-display font-bold tracking-tight leading-[0.95] text-5xl sm:text-6xl lg:text-7xl">
+            Anirudh
+            <span class="block bg-gradient-to-r from-cyan2-400 via-violet2-400 to-violet2-500 bg-clip-text text-transparent">Parupalli</span>
+          </h1>
+
+          <p class="text-xl sm:text-2xl text-slate-300 font-light max-w-2xl">
+            Founder · Business Analyst · Published Author · Researcher · Reviewer for 30+ international conferences.
+          </p>
+
+          <p class="text-base text-slate-400 max-w-2xl leading-relaxed">
+            Building Next Zen AI Strategix — translating complex domain knowledge into actionable insights for AI research, agentic systems, and human-AI interaction.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-4 pt-2">
+            <a href="#research" class="inline-flex items-center gap-2 bg-gradient-to-r from-cyan2-500 to-violet2-500 text-ink-950 font-semibold px-6 py-3 rounded-full hover:shadow-xl hover:shadow-cyan2-500/30 transition-all">
+              <i data-lucide="sparkles" class="w-5 h-5"></i>
+              View my work
+            </a>
+            <a href="#contact" class="inline-flex items-center gap-2 border border-white/15 hover:border-cyan2-400 text-slate-100 font-medium px-6 py-3 rounded-full transition-all">
+              <i data-lucide="mail" class="w-5 h-5"></i>
+              Contact
+            </a>
+            <a href="https://www.linkedin.com/in/anirudh1377495/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-slate-300 hover:text-cyan2-400 px-2 py-2 transition">
+              <i data-lucide="linkedin" class="w-5 h-5"></i>
+              LinkedIn
+            </a>
+          </div>
+
+          <!-- Quick stats row -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-white/5">
+            <div>
+              <div class="font-display text-2xl sm:text-3xl font-bold text-cyan2-400" data-counter data-target="30" data-suffix="+">0</div>
+              <div class="text-xs text-slate-400 mt-1 uppercase tracking-wider">Conferences Reviewed</div>
+            </div>
+            <div>
+              <div class="font-display text-2xl sm:text-3xl font-bold text-cyan2-400" data-counter data-target="3" data-suffix="">0</div>
+              <div class="text-xs text-slate-400 mt-1 uppercase tracking-wider">Published Books</div>
+            </div>
+            <div>
+              <div class="font-display text-2xl sm:text-3xl font-bold text-cyan2-400" data-counter data-target="125" data-suffix="+">0</div>
+              <div class="text-xs text-slate-400 mt-1 uppercase tracking-wider">Hackathons Judged</div>
+            </div>
+            <div>
+              <div class="font-display text-2xl sm:text-3xl font-bold text-cyan2-400" data-counter data-target="1" data-suffix="">0</div>
+              <div class="text-xs text-slate-400 mt-1 uppercase tracking-wider">UK Design Patent</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Headshot -->
+        <div class="lg:col-span-5 relative" data-reveal data-reveal-delay="0.2">
+          <div class="relative w-full max-w-md mx-auto">
+            <div class="absolute -inset-4 bg-gradient-to-r from-cyan2-400 to-violet2-500 rounded-3xl blur-2xl opacity-30"></div>
+            <div class="relative aspect-[4/5] rounded-3xl overflow-hidden border border-white/10 bg-ink-800">
+              <img src="assets/img/anirudh.jpg" alt="Portrait of Anirudh Parupalli" class="w-full h-full object-cover" />
+              <div class="absolute inset-0 bg-gradient-to-t from-ink-950/80 via-transparent to-transparent"></div>
+            </div>
+            <!-- Floating badge -->
+            <div class="absolute -bottom-4 -left-4 glass-card px-5 py-3 rounded-2xl flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan2-400 to-violet2-500 flex items-center justify-center">
+                <i data-lucide="briefcase" class="w-5 h-5 text-ink-950"></i>
+              </div>
+              <div>
+                <div class="font-semibold text-sm">Founder</div>
+                <div class="text-xs text-slate-400">Next Zen AI Strategix</div>
+              </div>
+            </div>
+            <div class="absolute -top-4 -right-4 glass-card px-5 py-3 rounded-2xl flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-violet2-400 to-cyan2-500 flex items-center justify-center">
+                <i data-lucide="award" class="w-5 h-5 text-ink-950"></i>
+              </div>
+              <div>
+                <div class="font-semibold text-sm">M.S.</div>
+                <div class="text-xs text-slate-400">Saint Peter's, GPA 3.81</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-slate-500 animate-bounce">
+        <i data-lucide="chevron-down" class="w-6 h-6"></i>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="py-24 sm:py-32 relative">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="grid lg:grid-cols-12 gap-12">
+          <div class="lg:col-span-4" data-reveal>
+            <div class="text-cyan2-400 font-mono text-sm tracking-wider uppercase mb-4">01 — About</div>
+            <h2 class="font-display text-4xl sm:text-5xl font-bold leading-tight">
+              Bridging <span class="text-cyan2-400">domain expertise</span> and frontier AI.
+            </h2>
+          </div>
+          <div class="lg:col-span-8 space-y-6 text-slate-300 leading-relaxed text-lg" data-reveal data-reveal-delay="0.15">
+            <p>
+              I'm a Business Analyst and founder with 3+ years of experience translating complex domain knowledge into actionable insights for AI research initiatives — bridging quantitative disciplines like mathematics and physics with the development of agentic systems and human-AI interaction.
+            </p>
+            <p>
+              My work spans <span class="text-slate-100 font-medium">hospitality, banking & payments, investment banking, and global capital markets</span> — designing analytical frameworks that evaluate AI approaches to human information-seeking, and building prototype automations with Excel, VB, Macros, and Power Automate to optimize commodity operations.
+            </p>
+            <p>
+              Outside of client work, I publish books, file design patents, review papers for international conferences and IEEE journals, and serve on editorial boards — a curiosity-driven approach to building beneficial AI systems.
+            </p>
+            <div class="flex flex-wrap gap-3 pt-4">
+              <span class="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">Agentic Systems</span>
+              <span class="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">Human-AI Interaction</span>
+              <span class="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">Data Analysis</span>
+              <span class="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">Research Methodology</span>
+              <span class="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">Process Automation</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE TIMELINE -->
+    <section id="experience" class="py-24 sm:py-32 relative">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-16" data-reveal>
+          <div class="text-cyan2-400 font-mono text-sm tracking-wider uppercase mb-4">02 — Experience</div>
+          <h2 class="font-display text-4xl sm:text-5xl font-bold">A journey through <span class="text-cyan2-400">data, analytics, and AI</span></h2>
+        </div>
+
+        <div class="relative">
+          <!-- Vertical line -->
+          <div class="absolute left-4 sm:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-cyan2-400/50 via-violet2-500/50 to-transparent"></div>
+
+          <div class="space-y-12">
+            <!-- Job 1 - Founder Next Zen -->
+            <div class="timeline-item relative pl-12 sm:pl-0 sm:grid sm:grid-cols-2 sm:gap-12" data-reveal>
+              <div class="absolute left-2 sm:left-1/2 sm:-translate-x-1/2 top-2 w-5 h-5 rounded-full bg-gradient-to-br from-cyan2-400 to-violet2-500 ring-4 ring-ink-950 shadow-lg shadow-cyan2-400/50"></div>
+              <div class="sm:text-right sm:pr-12">
+                <div class="text-xs font-mono text-cyan2-400 mb-2">Nov 2024 — Present</div>
+                <h3 class="font-display text-xl font-semibold">Founder & Business Analyst</h3>
+                <a href="http://nextzenaistrategix.com/" target="_blank" rel="noopener" class="text-violet2-400 hover:text-cyan2-400 transition text-sm inline-flex items-center gap-1 mt-1">
+                  Next Zen AI Strategix LLC
+                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                </a>
+              </div>
+              <div class="sm:pl-12 mt-3 sm:mt-0">
+                <div class="glass-card p-6 rounded-2xl">
+                  <p class="text-slate-300 text-sm leading-relaxed">
+                    Spearheading analysis of complex quantitative data to identify novel AI research avenues. Designing analytical frameworks to assess emerging AI models and translating intricate domain knowledge into research roadmaps for interdisciplinary teams.
+                  </p>
+                  <div class="flex flex-wrap gap-2 mt-4">
+                    <span class="text-xs px-2.5 py-1 rounded-full bg-cyan2-500/10 text-cyan2-400 border border-cyan2-400/20">Python</span>
+                    <span class="text-xs px-2.5 py-1 rounded-full bg-cyan2-500/10 text-cyan2-400 border border-cyan2-400/20">SQL</span>
+                    <span class="text-xs px-2.5 py-1 rounded-full bg-cyan2-500/10 text-cyan2-400 border border-cyan2-400/20">Tableau</span>
+                    <span class="text-xs px-2.5 py-1 rounded-full bg-cyan2-500/10 text-cyan2-400 border border-cyan2-400/20">Pandas</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Job 2 - Wyndham -->
+            <div class="timeline-item relative pl-12 sm:pl-0 sm:grid sm:grid-cols-2 sm:gap-12" data-reveal>
+              <div class="absolute left-2 sm:left-1/2 sm:-translate-x-1/2 top-2 w-5 h-5 rounded-full bg-gradient-to-br from-cyan2-400 to-violet2-500 ring-4 ring-ink-950 shadow-lg shadow-cyan2-400/50"></div>
+              <div class="sm:col-start-2 sm:pl-12">
+                <div class="text-xs font-mono text-cyan2-400 mb-2">Jul 2025 — Present</div>
+                <h3 class="font-display text-xl font-semibold">Business Analyst — IT Operations & Revenue Systems</h3>
+                <div class="text-violet2-400 text-sm mt-1">Wyndham Hotels & Resorts / 8750 Hospitality LLC · Orlando, FL</div>
+              </div>
+              <div class="sm:col-start-1 sm:row-start-1 sm:text-right sm:pr-12 mt-3 sm:mt-0">
+                <div class="glass-card p-6 rounded-2xl">
+                  <p class="text-slate-300 text-sm leading-relaxed">
+                    Elicited BRDs/FRDs from stakeholders, built SQL + Power BI dashboards for revenue forecasting, variance analysis, and KPI reporting. Delivered Tableau dashboards tracking revenue, occupancy, and customer metrics — improving revenue optimization strategies.
+                  </p>
+                  <div class="flex flex-wrap gap-2 mt-4">
+                    <span class="text-xs px-2.5 py-1 rounded-full bg-violet2-500/10 text-violet2-400 border border-violet2-400/20">Power BI</span>
+                    <span class="text-xs px-2.5 py-1 rounded-full bg-violet2-500/10 text-violet2-400 border border-violet2-400/20">Tableau</span>
+                    <span class="text-xs px-2.5 py-1 rounded-full bg-violet2-500/10 text-violet2-400 border border-violet2-400/20">SQL</span>
+                    <span class="text-xs px-2.5 py-1 rounded-full bg-violet2-500/10 text-violet2-400 border border-violet2-400/20">Agile</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Job 3 - Elite Tech Solute -->
+            <div class="timeline-item relative pl-12 sm:pl-0 sm:grid sm:grid-cols-2 sm:gap-12" data-reveal>
+              <div class="absolute left-2 sm:left-1/2 sm:-translate-x-1/2 top-2 w-5 h-5 rounded-full bg-gradient-to-br from-cyan2-400 to-violet2-500 ring-4 ring-ink-950 shadow-lg shadow-cyan2-400/50"></div>
+              <div class="sm:text-right sm:pr-12">
+                <div class="text-xs font-mono text-cyan2-400 mb-2">Nov 2024 — Jul 2025</div>
+                <h3 class="font-display text-xl font-semibold">Business Analytics</h3>
+                <div class="text-violet2-400 text-sm mt-1">Elite Tech Solute Inc · Jersey City, NJ</div>
+              </div>
+              <div class="sm:pl-12 mt-3 sm:mt-0">
+                <div class="glass-card p-6 rounded-2xl">
+                  <p class="text-slate-300 text-sm leading-relaxed">
+                    Defined requirements for payment processing systems including API integrations, reconciliation, STP automation. Led requirement workshops aligning banking, Investment Banking, and Global Capital Markets processes with PCI-compliant features.
+                  </p>
+                  <div class="flex flex-wrap gap-2 mt-4">
+                    <span class="text-xs px-2.5 py-1 rounded-full bg-cyan2-500/10 text-cyan2-400 border border-cyan2-400/20">Python</span>
+                    <span class="text-xs px-2.5 py-1 rounded-full bg-cyan2-500/10 text-cyan2-400 border border-cyan2-400/20">Pandas</span>
+                    <span class="text-xs px-2.5 py-1 rounded-full bg-cyan2-500/10 text-cyan2-400 border border-cyan2-400/20">PCI</span>
+                    <span class="text-xs px-2.5 py-1 rounded-full bg-cyan2-500/10 text-cyan2-400 border border-cyan2-400/20">BRD/FRD</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Job 4 - Intelligenie -->
+            <div class="timeline-item relative pl-12 sm:pl-0 sm:grid sm:grid-cols-2 sm:gap-12" data-reveal>
+              <div class="absolute left-2 sm:left-1/2 sm:-translate-x-1/2 top-2 w-5 h-5 rounded-full bg-gradient-to-br from-cyan2-400 to-violet2-500 ring-4 ring-ink-950 shadow-lg shadow-cyan2-400/50"></div>
+              <div class="sm:col-start-2 sm:pl-12">
+                <div class="text-xs font-mono text-cyan2-400 mb-2">Jan 2024 — Nov 2024</div>
+                <h3 class="font-display text-xl font-semibold">Business Analyst</h3>
+                <div class="text-violet2-400 text-sm mt-1">Intelligenie LLC · New Jersey</div>
+              </div>
+              <div class="sm:col-start-1 sm:row-start-1 sm:text-right sm:pr-12 mt-3 sm:mt-0">
+                <div class="glass-card p-6 rounded-2xl">
+                  <p class="text-slate-300 text-sm leading-relaxed">
+                    Documented business requirements for technology initiatives. Applied mathematical and analytical thinking to dissect complex problems, contributing depth from a rigorous quantitative field to interdisciplinary AI research.
+                  </p>
+                  <div class="flex flex-wrap gap-2 mt-4">
+                    <span class="text-xs px-2.5 py-1 rounded-full bg-violet2-500/10 text-violet2-400 border border-violet2-400/20">MATLAB</span>
+                    <span class="text-xs px-2.5 py-1 rounded-full bg-violet2-500/10 text-violet2-400 border border-violet2-400/20">SAS</span>
+                    <span class="text-xs px-2.5 py-1 rounded-full bg-violet2-500/10 text-violet2-400 border border-violet2-400/20">Jira</span>
+                    <span class="text-xs px-2.5 py-1 rounded-full bg-violet2-500/10 text-violet2-400 border border-violet2-400/20">Confluence</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Job 5 - ICICI -->
+            <div class="timeline-item relative pl-12 sm:pl-0 sm:grid sm:grid-cols-2 sm:gap-12" data-reveal>
+              <div class="absolute left-2 sm:left-1/2 sm:-translate-x-1/2 top-2 w-5 h-5 rounded-full bg-gradient-to-br from-cyan2-400 to-violet2-500 ring-4 ring-ink-950 shadow-lg shadow-cyan2-400/50"></div>
+              <div class="sm:text-right sm:pr-12">
+                <div class="text-xs font-mono text-cyan2-400 mb-2">Nov 2021 — Jan 2022</div>
+                <h3 class="font-display text-xl font-semibold">Phone Banking Officer</h3>
+                <div class="text-violet2-400 text-sm mt-1">ICICI Bank · Hyderabad, India</div>
+              </div>
+              <div class="sm:pl-12 mt-3 sm:mt-0">
+                <div class="glass-card p-6 rounded-2xl">
+                  <p class="text-slate-300 text-sm leading-relaxed">
+                    Supported customer accounts and resolved issues. Built SQL queries and Power BI reports for financial product validation, data integrity, and trading platform analysis.
+                  </p>
+                  <div class="flex flex-wrap gap-2 mt-4">
+                    <span class="text-xs px-2.5 py-1 rounded-full bg-cyan2-500/10 text-cyan2-400 border border-cyan2-400/20">SQL</span>
+                    <span class="text-xs px-2.5 py-1 rounded-full bg-cyan2-500/10 text-cyan2-400 border border-cyan2-400/20">Power BI</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOOKS -->
+    <section id="books" class="py-24 sm:py-32 relative">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16" data-reveal>
+          <div class="text-cyan2-400 font-mono text-sm tracking-wider uppercase mb-4">03 — Author</div>
+          <h2 class="font-display text-4xl sm:text-5xl font-bold">Three published <span class="text-cyan2-400">books</span></h2>
+          <p class="text-slate-400 mt-4 max-w-2xl mx-auto">Writing about founders, lifestyle, and the philosophy of designing the life you want.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Book 1 -->
+          <div class="book-card group" data-reveal data-pdf="assets/books/book1-next-zen-founders.pdf" data-title="Next Zen Founders">
+            <div class="relative aspect-[2/3] rounded-2xl overflow-hidden glass-card cursor-pointer">
+              <img src="assets/books/book1-cover.jpg" alt="Next Zen Founders book cover" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/40 to-transparent"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-6">
+                <div class="text-xs font-mono text-cyan2-400 mb-1">BOOK 01</div>
+                <h3 class="font-display text-xl font-bold">Next Zen Founders</h3>
+                <p class="text-slate-300 text-sm mt-2">A guide to building calmly and intentionally in the modern startup era.</p>
+              </div>
+              <div class="absolute top-4 right-4 w-10 h-10 rounded-full bg-cyan2-500/20 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                <i data-lucide="eye" class="w-5 h-5 text-cyan2-400"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Book 2 -->
+          <div class="book-card group" data-reveal data-reveal-delay="0.1" data-pdf="assets/books/book2-love-life-of-the-1-percent.jpg" data-title="The Love Life of the 1%">
+            <div class="relative aspect-[2/3] rounded-2xl overflow-hidden glass-card cursor-pointer">
+              <img src="assets/books/book2-love-life-of-the-1-percent.jpg" alt="The Love Life of the 1% book cover" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/40 to-transparent"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-6">
+                <div class="text-xs font-mono text-cyan2-400 mb-1">BOOK 02</div>
+                <h3 class="font-display text-xl font-bold">The Love Life of the 1%</h3>
+                <p class="text-slate-300 text-sm mt-2">An exploration of relationships, ambition, and meaning at the top.</p>
+              </div>
+              <div class="absolute top-4 right-4 w-10 h-10 rounded-full bg-cyan2-500/20 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                <i data-lucide="eye" class="w-5 h-5 text-cyan2-400"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Book 3 -->
+          <div class="book-card group" data-reveal data-reveal-delay="0.2" data-pdf="assets/books/book3-design-the-life.jpg" data-title="Design The Life They Said You Couldn't">
+            <div class="relative aspect-[2/3] rounded-2xl overflow-hidden glass-card cursor-pointer">
+              <img src="assets/books/book3-design-the-life.jpg" alt="Design The Life They Said You Couldn't book cover" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/40 to-transparent"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-6">
+                <div class="text-xs font-mono text-cyan2-400 mb-1">BOOK 03</div>
+                <h3 class="font-display text-xl font-bold">Design The Life They Said You Couldn't</h3>
+                <p class="text-slate-300 text-sm mt-2">A manifesto for engineering an unconventional, fulfilling life.</p>
+              </div>
+              <div class="absolute top-4 right-4 w-10 h-10 rounded-full bg-cyan2-500/20 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                <i data-lucide="eye" class="w-5 h-5 text-cyan2-400"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESEARCH & PUBLICATIONS -->
+    <section id="research" class="py-24 sm:py-32 relative">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16" data-reveal>
+          <div class="text-cyan2-400 font-mono text-sm tracking-wider uppercase mb-4">04 — Research</div>
+          <h2 class="font-display text-4xl sm:text-5xl font-bold">Research & <span class="text-cyan2-400">Publications</span></h2>
+        </div>
+
+        <!-- Profile cards -->
+        <div class="grid sm:grid-cols-3 gap-4 mb-12">
+          <a href="http://scholar.google.com/citations?user=zRu6S8oAAAAJ&hl=en" target="_blank" rel="noopener" class="glass-card p-5 rounded-2xl hover:border-cyan2-400/40 transition-all group">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-cyan2-500/15 flex items-center justify-center">
+                <i data-lucide="graduation-cap" class="w-5 h-5 text-cyan2-400"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="text-xs text-slate-400">Profile</div>
+                <div class="font-semibold truncate">Google Scholar</div>
+              </div>
+              <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-500 group-hover:text-cyan2-400 transition"></i>
+            </div>
+          </a>
+          <a href="https://www.researchgate.net/profile/Anirudh-Parupalli" target="_blank" rel="noopener" class="glass-card p-5 rounded-2xl hover:border-cyan2-400/40 transition-all group">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-violet2-500/15 flex items-center justify-center">
+                <i data-lucide="microscope" class="w-5 h-5 text-violet2-400"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="text-xs text-slate-400">Profile</div>
+                <div class="font-semibold truncate">ResearchGate</div>
+              </div>
+              <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-500 group-hover:text-cyan2-400 transition"></i>
+            </div>
+          </a>
+          <a href="https://orcid.org/0009-0002-2024-3088" target="_blank" rel="noopener" class="glass-card p-5 rounded-2xl hover:border-cyan2-400/40 transition-all group">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-cyan2-500/15 flex items-center justify-center">
+                <i data-lucide="badge-check" class="w-5 h-5 text-cyan2-400"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="text-xs text-slate-400">ORCID</div>
+                <div class="font-semibold truncate">0009-0002-2024-3088</div>
+              </div>
+              <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-500 group-hover:text-cyan2-400 transition"></i>
+            </div>
+          </a>
+        </div>
+
+        <!-- Publications grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="researchGrid">
+          <div class="cert-card glass-card rounded-2xl overflow-hidden cursor-pointer group" data-reveal data-pdf="assets/research/tijer-certificate.pdf" data-title="TIJER Publication Certificate">
+            <div class="aspect-[4/3] bg-ink-800 flex items-center justify-center relative overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-br from-cyan2-500/20 to-violet2-500/20"></div>
+              <i data-lucide="file-text" class="w-16 h-16 text-cyan2-400 relative"></i>
+            </div>
+            <div class="p-5">
+              <div class="text-xs font-mono text-cyan2-400 mb-1">PUBLICATION</div>
+              <h3 class="font-semibold">TIJER Research Publication</h3>
+              <p class="text-slate-400 text-sm mt-1">International Journal of Emerging Research</p>
+            </div>
+          </div>
+
+          <div class="cert-card glass-card rounded-2xl overflow-hidden cursor-pointer group" data-reveal data-reveal-delay="0.05" data-pdf="assets/research/tijer-confirmation.pdf" data-title="TIJER Confirmation Letter">
+            <div class="aspect-[4/3] bg-ink-800 flex items-center justify-center relative overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-br from-violet2-500/20 to-cyan2-500/20"></div>
+              <i data-lucide="mail-check" class="w-16 h-16 text-violet2-400 relative"></i>
+            </div>
+            <div class="p-5">
+              <div class="text-xs font-mono text-violet2-400 mb-1">CONFIRMATION</div>
+              <h3 class="font-semibold">TIJER Confirmation Letter</h3>
+              <p class="text-slate-400 text-sm mt-1">Acceptance & publication confirmation</p>
+            </div>
+          </div>
+
+          <div class="cert-card glass-card rounded-2xl overflow-hidden cursor-pointer group" data-reveal data-reveal-delay="0.1" data-pdf="assets/research/aisp-2025-presenter-35.pdf" data-title="AISP 2025 Presenter Certificate (35)">
+            <div class="aspect-[4/3] bg-ink-800 flex items-center justify-center relative overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-br from-cyan2-500/20 to-violet2-500/20"></div>
+              <i data-lucide="presentation" class="w-16 h-16 text-cyan2-400 relative"></i>
+            </div>
+            <div class="p-5">
+              <div class="text-xs font-mono text-cyan2-400 mb-1">CONFERENCE</div>
+              <h3 class="font-semibold">AISP 2025 — Paper 35</h3>
+              <p class="text-slate-400 text-sm mt-1">Presenter Certificate</p>
+            </div>
+          </div>
+
+          <div class="cert-card glass-card rounded-2xl overflow-hidden cursor-pointer group" data-reveal data-reveal-delay="0.15" data-pdf="assets/research/aisp-2025-presenter-36.pdf" data-title="AISP 2025 Presenter Certificate (36)">
+            <div class="aspect-[4/3] bg-ink-800 flex items-center justify-center relative overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-br from-violet2-500/20 to-cyan2-500/20"></div>
+              <i data-lucide="presentation" class="w-16 h-16 text-violet2-400 relative"></i>
+            </div>
+            <div class="p-5">
+              <div class="text-xs font-mono text-violet2-400 mb-1">CONFERENCE</div>
+              <h3 class="font-semibold">AISP 2025 — Paper 36</h3>
+              <p class="text-slate-400 text-sm mt-1">Presenter Certificate</p>
+            </div>
+          </div>
+
+          <div class="cert-card glass-card rounded-2xl overflow-hidden cursor-pointer group" data-reveal data-reveal-delay="0.2" data-pdf="assets/research/1497-anirudh-parupalli.pdf" data-title="Conference Paper #1497">
+            <div class="aspect-[4/3] bg-ink-800 flex items-center justify-center relative overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-br from-cyan2-500/20 to-violet2-500/20"></div>
+              <i data-lucide="file-badge" class="w-16 h-16 text-cyan2-400 relative"></i>
+            </div>
+            <div class="p-5">
+              <div class="text-xs font-mono text-cyan2-400 mb-1">PAPER</div>
+              <h3 class="font-semibold">Conference Paper #1497</h3>
+              <p class="text-slate-400 text-sm mt-1">Anirudh Parupalli</p>
+            </div>
+          </div>
+
+          <div class="cert-card glass-card rounded-2xl overflow-hidden cursor-pointer group" data-reveal data-reveal-delay="0.25" data-pdf="assets/research/1498-anirudh-parupalli.pdf" data-title="Conference Paper #1498">
+            <div class="aspect-[4/3] bg-ink-800 flex items-center justify-center relative overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-br from-violet2-500/20 to-cyan2-500/20"></div>
+              <i data-lucide="file-badge" class="w-16 h-16 text-violet2-400 relative"></i>
+            </div>
+            <div class="p-5">
+              <div class="text-xs font-mono text-violet2-400 mb-1">PAPER</div>
+              <h3 class="font-semibold">Conference Paper #1498</h3>
+              <p class="text-slate-400 text-sm mt-1">Anirudh Parupalli</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONFERENCE REVIEWS -->
+    <section id="reviews" class="py-24 sm:py-32 relative">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16" data-reveal>
+          <div class="text-cyan2-400 font-mono text-sm tracking-wider uppercase mb-4">05 — Peer Review</div>
+          <h2 class="font-display text-4xl sm:text-5xl font-bold">Reviewer for <span class="text-cyan2-400">30+ international conferences</span></h2>
+          <p class="text-slate-400 mt-4 max-w-2xl mx-auto">Active peer reviewer for IEEE, Springer, and international conference proceedings spanning AI, networking, computing, and emerging technologies.</p>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12" data-reveal>
+          <div class="glass-card p-6 rounded-2xl text-center">
+            <div class="font-display text-3xl font-bold text-cyan2-400" data-counter data-target="30" data-suffix="+">0</div>
+            <div class="text-xs text-slate-400 mt-2 uppercase tracking-wider">Conferences</div>
+          </div>
+          <div class="glass-card p-6 rounded-2xl text-center">
+            <div class="font-display text-3xl font-bold text-violet2-400" data-counter data-target="24" data-suffix="">0</div>
+            <div class="text-xs text-slate-400 mt-2 uppercase tracking-wider">CMT Reviews</div>
+          </div>
+          <div class="glass-card p-6 rounded-2xl text-center">
+            <div class="font-display text-3xl font-bold text-cyan2-400" data-counter data-target="4" data-suffix="">0</div>
+            <div class="text-xs text-slate-400 mt-2 uppercase tracking-wider">IEEE Conferences</div>
+          </div>
+          <div class="glass-card p-6 rounded-2xl text-center">
+            <div class="font-display text-3xl font-bold text-violet2-400" data-counter data-target="2" data-suffix="">0</div>
+            <div class="text-xs text-slate-400 mt-2 uppercase tracking-wider">Journal Reviews</div>
+          </div>
+        </div>
+
+        <!-- Conference grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 mb-10" data-reveal>
+          <div class="conf-chip" data-link="https://icetce.skit.ac.in/2025/"><span>ICETCE 2025</span><span class="text-xs text-slate-500 mt-1">4 papers reviewed</span></div>
+          <div class="conf-chip"><span>ICE2CPT</span><span class="text-xs text-slate-500 mt-1">3 papers reviewed</span></div>
+          <div class="conf-chip" data-link="https://conference.medicaps.ac.in/"><span>ICEETA</span><span class="text-xs text-slate-500 mt-1">2 papers reviewed</span></div>
+          <div class="conf-chip" data-link="https://www.bdai.net/"><span>BDAI 2025</span><span class="text-xs text-slate-500 mt-1">1 paper reviewed</span></div>
+          <div class="conf-chip" data-link="https://sites.google.com/view/icrteect2025/home"><span>ICRTEECT 2025</span><span class="text-xs text-slate-500 mt-1">3 papers reviewed</span></div>
+          <div class="conf-chip" data-link="https://icicnct.co.in/index.php"><span>ICICNCT 2025</span><span class="text-xs text-slate-500 mt-1">3 papers reviewed</span></div>
+          <div class="conf-chip" data-link="https://iceteg.jssstuniv.in/"><span>ICETEG</span><span class="text-xs text-slate-500 mt-1">2 papers reviewed</span></div>
+          <div class="conf-chip" data-link="https://ieee-ises.github.io/IEEE-iSES_2025_Website/index.html"><span>IEEE-iSES 2025</span><span class="text-xs text-slate-500 mt-1">3 papers reviewed</span></div>
+          <div class="conf-chip" data-link="http://icceai.cn/"><span>ICCEAI</span><span class="text-xs text-slate-500 mt-1">2 papers reviewed</span></div>
+          <div class="conf-chip" data-link="https://2025.isedconf.org/"><span>ISED 2025</span><span class="text-xs text-slate-500 mt-1">2 papers reviewed</span></div>
+          <div class="conf-chip" data-link="https://ssitcon.in/"><span>SSITCON 2025</span><span class="text-xs text-slate-500 mt-1">1 paper reviewed</span></div>
+          <div class="conf-chip" data-link="https://oriental.ac.in/oist-bhopal/ieee-conference"><span>DECON</span><span class="text-xs text-slate-500 mt-1">2 papers reviewed</span></div>
+          <div class="conf-chip"><span>GIEST</span></div>
+          <div class="conf-chip"><span>IC3IT</span></div>
+          <div class="conf-chip"><span>ICAAIC</span></div>
+          <div class="conf-chip"><span>ISCMI</span></div>
+          <div class="conf-chip"><span>IC2NC</span></div>
+          <div class="conf-chip"><span>SMART</span></div>
+          <div class="conf-chip"><span>ICIIS</span></div>
+          <div class="conf-chip"><span>AISP</span></div>
+          <div class="conf-chip"><span>AIST</span></div>
+          <div class="conf-chip"><span>ICAIDES</span></div>
+          <div class="conf-chip"><span>SMARTGENCON</span></div>
+          <div class="conf-chip"><span>ICNAS</span></div>
+          <div class="conf-chip"><span>ICSISCET</span></div>
+          <div class="conf-chip"><span>IC2SDT</span></div>
+          <div class="conf-chip"><span>ICETISI</span></div>
+          <div class="conf-chip"><span>CICN</span></div>
+          <div class="conf-chip"><span>CNC</span></div>
+          <div class="conf-chip"><span>COMNETSAT</span></div>
+          <div class="conf-chip"><span>ICICCS</span></div>
+          <div class="conf-chip"><span>InCIT</span></div>
+          <div class="conf-chip"><span>ICACII</span></div>
+          <div class="conf-chip"><span>ICDLAI</span></div>
+          <div class="conf-chip"><span>ICEC2NT</span></div>
+          <div class="conf-chip"><span>ICEdge</span></div>
+          <div class="conf-chip"><span>ICDLT</span></div>
+          <div class="conf-chip"><span>ICTSM</span></div>
+          <div class="conf-chip"><span>CSAIA</span></div>
+          <div class="conf-chip"><span>IEIR</span></div>
+          <div class="conf-chip"><span>ISCID</span></div>
+          <div class="conf-chip"><span>ESAI</span></div>
+          <div class="conf-chip"><span>ACAI</span></div>
+          <div class="conf-chip"><span>RAAI</span></div>
+          <div class="conf-chip"><span>ISAECT</span></div>
+          <div class="conf-chip"><span>ICBDS</span></div>
+          <div class="conf-chip"><span>ICoDSE</span></div>
+          <div class="conf-chip"><span>InCoWoCo</span></div>
+          <div class="conf-chip"><span>ICCSPCI</span></div>
+          <div class="conf-chip"><span>iSSSC</span></div>
+          <div class="conf-chip"><span>EAMCON</span></div>
+        </div>
+
+        <!-- Reviewer Certificates -->
+        <h3 class="font-display text-2xl font-semibold mb-6" data-reveal>Selected Reviewer Certificates</h3>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="reviewCertGrid"></div>
+      </div>
+    </section>
+
+    <!-- EDITORIAL & JUDGING -->
+    <section id="editorial" class="py-24 sm:py-32 relative">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-16" data-reveal>
+          <div class="text-cyan2-400 font-mono text-sm tracking-wider uppercase mb-4">06 — Editorial & Judging</div>
+          <h2 class="font-display text-4xl sm:text-5xl font-bold">Editorial Board & <span class="text-cyan2-400">Hackathon Judging</span></h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- Editorial -->
+          <div class="space-y-4" data-reveal>
+            <h3 class="font-display text-2xl font-semibold flex items-center gap-3">
+              <i data-lucide="bookmark" class="w-6 h-6 text-cyan2-400"></i>
+              Editorial Board
+            </h3>
+            <div class="glass-card p-6 rounded-2xl cursor-pointer hover:border-cyan2-400/40 transition" data-pdf="assets/editorial/editorial-appointment.pdf" data-title="Editorial Board Appointment">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-xl bg-cyan2-500/15 flex items-center justify-center flex-shrink-0">
+                  <i data-lucide="award" class="w-6 h-6 text-cyan2-400"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold">Editorial Board Member Appointment</h4>
+                  <p class="text-sm text-slate-400 mt-1">Official appointment to the Editorial Board of an international peer-reviewed journal.</p>
+                </div>
+              </div>
+            </div>
+            <div class="glass-card p-6 rounded-2xl cursor-pointer hover:border-cyan2-400/40 transition" data-pdf="assets/editorial/editorial-ap.pdf" data-title="Editorial Board Certificate">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-xl bg-violet2-500/15 flex items-center justify-center flex-shrink-0">
+                  <i data-lucide="badge-check" class="w-6 h-6 text-violet2-400"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold">Editorial Board Certificate</h4>
+                  <p class="text-sm text-slate-400 mt-1">Recognition of editorial service contributions.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Judging -->
+          <div class="space-y-4" data-reveal data-reveal-delay="0.15">
+            <h3 class="font-display text-2xl font-semibold flex items-center gap-3">
+              <i data-lucide="gavel" class="w-6 h-6 text-cyan2-400"></i>
+              Hackathon Judging
+            </h3>
+            <div class="glass-card p-6 rounded-2xl cursor-pointer hover:border-cyan2-400/40 transition" data-pdf="assets/judging/q3-2025-summary.pdf" data-title="Q3 2025 Hackathon Judging Summary">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-xl bg-cyan2-500/15 flex items-center justify-center flex-shrink-0">
+                  <i data-lucide="trophy" class="w-6 h-6 text-cyan2-400"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold">Q3 2025 Judging Summary</h4>
+                  <p class="text-sm text-slate-400 mt-1">Comprehensive review of hackathon projects judged across July, August, September, and October 2025.</p>
+                </div>
+              </div>
+            </div>
+            <div class="grid grid-cols-4 gap-2">
+              <div class="glass-card p-3 rounded-xl text-center">
+                <div class="text-xl font-bold text-cyan2-400">12</div>
+                <div class="text-[10px] text-slate-400 uppercase mt-0.5">July</div>
+              </div>
+              <div class="glass-card p-3 rounded-xl text-center">
+                <div class="text-xl font-bold text-violet2-400">21</div>
+                <div class="text-[10px] text-slate-400 uppercase mt-0.5">August</div>
+              </div>
+              <div class="glass-card p-3 rounded-xl text-center">
+                <div class="text-xl font-bold text-cyan2-400">12</div>
+                <div class="text-[10px] text-slate-400 uppercase mt-0.5">September</div>
+              </div>
+              <div class="glass-card p-3 rounded-xl text-center">
+                <div class="text-xl font-bold text-violet2-400">80+</div>
+                <div class="text-[10px] text-slate-400 uppercase mt-0.5">October</div>
+              </div>
+            </div>
+            <p class="text-xs text-slate-500 italic">Total of 125+ hackathon projects judged in 2025.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PATENT -->
+    <section id="patent" class="py-24 sm:py-32 relative">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-16" data-reveal>
+          <div class="text-cyan2-400 font-mono text-sm tracking-wider uppercase mb-4">07 — Innovation</div>
+          <h2 class="font-display text-4xl sm:text-5xl font-bold">UK Design <span class="text-cyan2-400">Patent</span></h2>
+        </div>
+
+        <div class="glass-card p-8 sm:p-12 rounded-3xl relative overflow-hidden" data-reveal>
+          <div class="absolute -top-20 -right-20 w-80 h-80 bg-violet2-500/20 rounded-full blur-3xl"></div>
+          <div class="absolute -bottom-20 -left-20 w-80 h-80 bg-cyan2-500/20 rounded-full blur-3xl"></div>
+
+          <div class="relative grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan2-500/10 border border-cyan2-400/30 text-xs font-mono text-cyan2-400 uppercase mb-4">
+                <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+                Granted Patent
+              </div>
+              <h3 class="font-display text-3xl font-bold leading-tight">UK Design Patent</h3>
+              <p class="text-slate-300 mt-4 leading-relaxed">
+                Registered with the Intellectual Property Office of the United Kingdom — recognizing original design contribution and creative problem-solving in product development.
+              </p>
+              <div class="flex flex-wrap gap-3 mt-6">
+                <button class="cert-card inline-flex items-center gap-2 bg-gradient-to-r from-cyan2-500 to-violet2-500 text-ink-950 font-semibold px-5 py-2.5 rounded-full text-sm" data-pdf="assets/patent/uk-design-patent.pdf" data-title="UK Design Patent">
+                  <i data-lucide="eye" class="w-4 h-4"></i>
+                  View Patent
+                </button>
+              </div>
+            </div>
+            <div class="relative">
+              <div class="aspect-[3/4] rounded-2xl bg-gradient-to-br from-ink-800 to-ink-900 border border-white/10 overflow-hidden flex items-center justify-center">
+                <i data-lucide="file-badge" class="w-32 h-32 text-cyan2-400/40"></i>
+              </div>
+              <div class="absolute -bottom-3 -right-3 px-4 py-2 rounded-xl bg-gradient-to-r from-cyan2-500 to-violet2-500 text-ink-950 text-xs font-bold uppercase tracking-wider">
+                🇬🇧 United Kingdom
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="py-24 sm:py-32 relative">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-16" data-reveal>
+          <div class="text-cyan2-400 font-mono text-sm tracking-wider uppercase mb-4">08 — Toolkit</div>
+          <h2 class="font-display text-4xl sm:text-5xl font-bold">Skills & <span class="text-cyan2-400">Tools</span></h2>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="glass-card p-6 rounded-2xl" data-reveal>
+            <i data-lucide="code-2" class="w-8 h-8 text-cyan2-400 mb-4"></i>
+            <h3 class="font-semibold mb-3">Languages</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-pill">Python</span>
+              <span class="skill-pill">R</span>
+              <span class="skill-pill">SQL</span>
+              <span class="skill-pill">VBA</span>
+            </div>
+          </div>
+
+          <div class="glass-card p-6 rounded-2xl" data-reveal data-reveal-delay="0.05">
+            <i data-lucide="bar-chart-3" class="w-8 h-8 text-violet2-400 mb-4"></i>
+            <h3 class="font-semibold mb-3">Analytics & BI</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-pill">Pandas</span>
+              <span class="skill-pill">NumPy</span>
+              <span class="skill-pill">Tableau</span>
+              <span class="skill-pill">Power BI</span>
+              <span class="skill-pill">Looker</span>
+            </div>
+          </div>
+
+          <div class="glass-card p-6 rounded-2xl" data-reveal data-reveal-delay="0.1">
+            <i data-lucide="database" class="w-8 h-8 text-cyan2-400 mb-4"></i>
+            <h3 class="font-semibold mb-3">Databases</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-pill">PostgreSQL</span>
+              <span class="skill-pill">MySQL</span>
+              <span class="skill-pill">SQL Server</span>
+            </div>
+          </div>
+
+          <div class="glass-card p-6 rounded-2xl" data-reveal data-reveal-delay="0.15">
+            <i data-lucide="git-branch" class="w-8 h-8 text-violet2-400 mb-4"></i>
+            <h3 class="font-semibold mb-3">Collaboration</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-pill">Jira</span>
+              <span class="skill-pill">Confluence</span>
+              <span class="skill-pill">Git</span>
+              <span class="skill-pill">Agile/Scrum</span>
+            </div>
+          </div>
+
+          <div class="glass-card p-6 rounded-2xl" data-reveal>
+            <i data-lucide="line-chart" class="w-8 h-8 text-cyan2-400 mb-4"></i>
+            <h3 class="font-semibold mb-3">Statistics</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-pill">Hypothesis Testing</span>
+              <span class="skill-pill">Regression</span>
+              <span class="skill-pill">Time Series</span>
+            </div>
+          </div>
+
+          <div class="glass-card p-6 rounded-2xl" data-reveal data-reveal-delay="0.05">
+            <i data-lucide="dollar-sign" class="w-8 h-8 text-violet2-400 mb-4"></i>
+            <h3 class="font-semibold mb-3">Finance Modeling</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-pill">Valuation</span>
+              <span class="skill-pill">Forecasting</span>
+              <span class="skill-pill">Sensitivity</span>
+            </div>
+          </div>
+
+          <div class="glass-card p-6 rounded-2xl" data-reveal data-reveal-delay="0.1">
+            <i data-lucide="layers-3" class="w-8 h-8 text-cyan2-400 mb-4"></i>
+            <h3 class="font-semibold mb-3">Documentation</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-pill">BRD/FRD</span>
+              <span class="skill-pill">RTM</span>
+              <span class="skill-pill">UAT</span>
+              <span class="skill-pill">Visio</span>
+            </div>
+          </div>
+
+          <div class="glass-card p-6 rounded-2xl" data-reveal data-reveal-delay="0.15">
+            <i data-lucide="brain-circuit" class="w-8 h-8 text-violet2-400 mb-4"></i>
+            <h3 class="font-semibold mb-3">AI Tools</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-pill">GitHub Copilot</span>
+              <span class="skill-pill">LLMs</span>
+              <span class="skill-pill">Power Automate</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" class="py-24 sm:py-32 relative">
+      <div class="max-w-5xl mx-auto px-6">
+        <div class="text-center mb-16" data-reveal>
+          <div class="text-cyan2-400 font-mono text-sm tracking-wider uppercase mb-4">09 — Education</div>
+          <h2 class="font-display text-4xl sm:text-5xl font-bold">Academic <span class="text-cyan2-400">background</span></h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="glass-card p-8 rounded-2xl" data-reveal>
+            <div class="flex items-start gap-4">
+              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan2-400 to-violet2-500 flex items-center justify-center flex-shrink-0">
+                <i data-lucide="graduation-cap" class="w-7 h-7 text-ink-950"></i>
+              </div>
+              <div class="flex-1">
+                <div class="text-xs font-mono text-cyan2-400 mb-1">MASTER'S DEGREE</div>
+                <h3 class="font-display text-xl font-bold">M.S. Business Analytics & Data Science</h3>
+                <p class="text-slate-300 mt-2">Saint Peter's University, NJ, USA</p>
+                <div class="inline-flex items-center gap-2 mt-3 px-3 py-1 rounded-full bg-cyan2-500/10 border border-cyan2-400/30 text-xs font-mono text-cyan2-400">
+                  <i data-lucide="star" class="w-3 h-3"></i>
+                  GPA 3.81 / 4.00
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-card p-8 rounded-2xl" data-reveal data-reveal-delay="0.15">
+            <div class="flex items-start gap-4">
+              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet2-500 to-cyan2-400 flex items-center justify-center flex-shrink-0">
+                <i data-lucide="cog" class="w-7 h-7 text-ink-950"></i>
+              </div>
+              <div class="flex-1">
+                <div class="text-xs font-mono text-violet2-400 mb-1">BACHELOR'S DEGREE</div>
+                <h3 class="font-display text-xl font-bold">B.Tech Mechanical Engineering</h3>
+                <p class="text-slate-300 mt-2">CMR Technical Campus (JNTU Hyderabad), India</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Certifications -->
+        <h3 class="font-display text-2xl font-semibold mt-12 mb-6" data-reveal>Certifications</h3>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4" data-reveal>
+          <div class="glass-card p-5 rounded-xl">
+            <i data-lucide="award" class="w-6 h-6 text-cyan2-400 mb-3"></i>
+            <div class="font-semibold text-sm">Career Essentials in Business Analysis</div>
+            <div class="text-xs text-slate-400 mt-1">Microsoft / LinkedIn</div>
+          </div>
+          <div class="glass-card p-5 rounded-xl">
+            <i data-lucide="award" class="w-6 h-6 text-violet2-400 mb-3"></i>
+            <div class="font-semibold text-sm">Data Analytics Job Simulation</div>
+            <div class="text-xs text-slate-400 mt-1">Deloitte Australia</div>
+          </div>
+          <div class="glass-card p-5 rounded-xl">
+            <i data-lucide="award" class="w-6 h-6 text-cyan2-400 mb-3"></i>
+            <div class="font-semibold text-sm">SQL for Data Analytics & Excel VBA</div>
+            <div class="text-xs text-slate-400 mt-1">Internshala</div>
+          </div>
+          <div class="glass-card p-5 rounded-xl">
+            <i data-lucide="award" class="w-6 h-6 text-violet2-400 mb-3"></i>
+            <div class="font-semibold text-sm">McKinsey.org Forward Program</div>
+            <div class="text-xs text-slate-400 mt-1">McKinsey & Company</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="py-24 sm:py-32 relative">
+      <div class="max-w-5xl mx-auto px-6">
+        <div class="glass-card p-10 sm:p-16 rounded-3xl text-center relative overflow-hidden" data-reveal>
+          <div class="absolute -top-20 left-1/2 -translate-x-1/2 w-96 h-96 bg-cyan2-500/20 rounded-full blur-3xl"></div>
+          <div class="absolute -bottom-20 left-1/2 -translate-x-1/2 w-96 h-96 bg-violet2-500/20 rounded-full blur-3xl"></div>
+
+          <div class="relative">
+            <div class="text-cyan2-400 font-mono text-sm tracking-wider uppercase mb-4">10 — Contact</div>
+            <h2 class="font-display text-4xl sm:text-6xl font-bold leading-tight">Let's <span class="bg-gradient-to-r from-cyan2-400 to-violet2-500 bg-clip-text text-transparent">build something</span> together.</h2>
+            <p class="text-slate-300 mt-6 max-w-xl mx-auto">Open to research collaborations, advisory roles, peer review invitations, and AI-strategy consulting.</p>
+
+            <div class="flex flex-wrap items-center justify-center gap-3 mt-10">
+              <a href="mailto:anirudh7929@gmail.com" class="inline-flex items-center gap-2 bg-gradient-to-r from-cyan2-500 to-violet2-500 text-ink-950 font-semibold px-6 py-3 rounded-full hover:shadow-xl hover:shadow-cyan2-500/30 transition-all">
+                <i data-lucide="mail" class="w-5 h-5"></i>
+                anirudh7929@gmail.com
+              </a>
+              <a href="tel:+13476257358" class="inline-flex items-center gap-2 border border-white/15 hover:border-cyan2-400 px-6 py-3 rounded-full transition">
+                <i data-lucide="phone" class="w-5 h-5"></i>
+                +1 (347) 625-7358
+              </a>
+            </div>
+
+            <div class="grid sm:grid-cols-4 gap-3 mt-10">
+              <a href="https://www.linkedin.com/in/anirudh1377495/" target="_blank" rel="noopener" class="glass-card p-4 rounded-xl hover:border-cyan2-400/40 transition group">
+                <i data-lucide="linkedin" class="w-5 h-5 text-cyan2-400 mb-2 mx-auto"></i>
+                <div class="text-xs text-slate-400">LinkedIn</div>
+                <div class="font-semibold text-sm">@anirudh1377495</div>
+              </a>
+              <a href="https://www.researchgate.net/profile/Anirudh-Parupalli" target="_blank" rel="noopener" class="glass-card p-4 rounded-xl hover:border-cyan2-400/40 transition group">
+                <i data-lucide="microscope" class="w-5 h-5 text-violet2-400 mb-2 mx-auto"></i>
+                <div class="text-xs text-slate-400">ResearchGate</div>
+                <div class="font-semibold text-sm">Anirudh Parupalli</div>
+              </a>
+              <a href="http://scholar.google.com/citations?user=zRu6S8oAAAAJ&hl=en" target="_blank" rel="noopener" class="glass-card p-4 rounded-xl hover:border-cyan2-400/40 transition group">
+                <i data-lucide="graduation-cap" class="w-5 h-5 text-cyan2-400 mb-2 mx-auto"></i>
+                <div class="text-xs text-slate-400">Scholar</div>
+                <div class="font-semibold text-sm">Citations</div>
+              </a>
+              <a href="http://nextzenaistrategix.com/" target="_blank" rel="noopener" class="glass-card p-4 rounded-xl hover:border-cyan2-400/40 transition group">
+                <i data-lucide="globe" class="w-5 h-5 text-violet2-400 mb-2 mx-auto"></i>
+                <div class="text-xs text-slate-400">Company</div>
+                <div class="font-semibold text-sm">Next Zen AI</div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/5 py-10">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-400">
+      <div class="flex items-center gap-2">
+        <span class="w-7 h-7 rounded-md bg-gradient-to-br from-cyan2-400 to-violet2-500 flex items-center justify-center font-display font-bold text-ink-950 text-xs">AP</span>
+        <span>© <span id="year">2026</span> Anirudh Parupalli. All rights reserved.</span>
+      </div>
+      <div class="flex items-center gap-2 text-xs">
+        <span class="w-2 h-2 rounded-full bg-cyan2-400 animate-pulse"></span>
+        <span>Crafted with care.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox modal -->
+  <div id="lightbox" class="fixed inset-0 z-[100] hidden bg-ink-950/95 backdrop-blur-md">
+    <div class="absolute inset-0 flex flex-col">
+      <div class="flex items-center justify-between px-6 py-4 border-b border-white/10">
+        <div>
+          <div class="font-display font-semibold text-lg" id="lightboxTitle">Document</div>
+        </div>
+        <div class="flex items-center gap-2">
+          <a id="lightboxDownload" download class="inline-flex items-center gap-2 text-sm text-slate-200 hover:text-cyan2-400 px-3 py-2 rounded-lg border border-white/10 transition">
+            <i data-lucide="download" class="w-4 h-4"></i> Download
+          </a>
+          <button id="lightboxClose" class="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition" aria-label="Close">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
+      <div class="flex-1 p-4 overflow-auto">
+        <div id="lightboxBody" class="max-w-5xl mx-auto h-full"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom JS -->
+  <script src="js/main.js"></script>
+</body>
+</html>
