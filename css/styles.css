@@ -158,6 +158,55 @@ body::before {
   opacity: 1;
 }
 
+/* ----- Floating badges (over hero photo) -----
+   More opaque than glass cards so they read clearly against bright photo areas.
+*/
+.floating-badge {
+  background: rgba(10, 13, 31, 0.85);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 10px 30px -8px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(34, 211, 238, 0.08) inset;
+  transition: all 0.3s ease;
+}
+
+.floating-badge:hover {
+  border-color: rgba(34, 211, 238, 0.3);
+  transform: translateY(-2px);
+}
+
+/* ----- Cert-link buttons (small inline lightbox triggers) ----- */
+.cert-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.7rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(34, 211, 238, 0.08);
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  color: #67e8f9;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cert-link::before {
+  content: '↗';
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+.cert-link:hover {
+  background: rgba(34, 211, 238, 0.15);
+  border-color: rgba(34, 211, 238, 0.5);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
 /* ----- Skill Pills ----- */
 .skill-pill {
   display: inline-flex;
